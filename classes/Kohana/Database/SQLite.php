@@ -10,7 +10,12 @@ class Kohana_Database_SQLite extends Database_PDO {
 
 	// SQLite does not support SET NAMES
 	public function set_charset($charset) { }
-	
+
+    /**
+     * @param string|null $like
+     *
+     * @return array
+     */
 	public function list_tables($like = NULL)
 	{
 		if (is_string($like))
@@ -34,7 +39,15 @@ class Kohana_Database_SQLite extends Database_PDO {
 		return $tables;
 	}
 
-	public function list_columns($table, $like = NULL)
+    /**
+     * @param string        $table
+     * @param string|null   $like
+     * @param bool          $add_prefix
+     *
+     * @return array
+     * @throws \Kohana_Exception
+     */
+	public function list_columns($table, $like = NULL, $add_prefix = true)
 	{
 		if (is_string($like))
 		{
